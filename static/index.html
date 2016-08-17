@@ -1,0 +1,462 @@
+<!doctype html>
+<html>
+	<head>
+		<title>activeLois — Postimage.org</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="description" content="Provides free image upload and hosting integration for forums. Free picture hosting and photo sharing for websites and blogs." />
+		<meta name="keywords" content="free image hosting, forum image hosting, phpbb image mod, phpbb upload mod, image upload mod, image host, sites, forums, picture hosting, photo sharing, image upload" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta property="og:title" content="activeLois — Postimage.org" />
+		<meta property="og:image" content="https://s31.postimg.org/5m6ejsabd/active_Lois.png" />
+		<meta property="og:description" content="Provides free image upload and hosting integration for forums. Free picture hosting and photo sharing for websites and blogs." />
+		<meta property="og:url" content="https://postimg.org/image/mzgoyn5mf/" />
+		<link rel="shortcut icon" href="/favicon.ico"/>
+ 		<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+		<link href='https://fonts.googleapis.com/css?family=Roboto:400,500&subset=latin,cyrillic,vietnamese' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css?1464549973"/>
+		<link rel="stylesheet" href="/lib/slidebars/slidebars.min.css"/>
+		<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css"/>
+		<link rel="stylesheet" href="/style_b.css?1467478387"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script src="/js/common.js?1464549973"></script>
+		<script>
+			var re=RegExp('https?://([^/]+\.)?(webvisor|transifex)\.com/');
+			if(top.location!=self.location && ! re.test(document.referrer)) {var href=self.location.href;top.location=href;}
+
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-73028906-3', 'auto', {'allowLinker': true});
+			ga('require', 'linker');
+			ga('require', 'linkid');
+			ga('linker:autoLink', ['postimage.org', 'postimg.org', 'postimg.cc'] );
+			ga('set', 'dimension3', "upload");
+			ga('set', 'dimension2', "mgid_safe");
+			ga('send', 'pageview');
+		</script>
+		<!-- Yandex.Metrika counter -->
+		<script type="text/javascript">
+			(function (d, w, c) {
+				(w[c] = w[c] || []).push(function() {
+					try {
+						w.yaCounter36205910 = new Ya.Metrika({
+							id:36205910,
+							clickmap:true,
+							trackLinks:true,
+							accurateTrackBounce:true,
+							webvisor:true,
+							ut:"noindex"
+						});
+					} catch(e) { }
+				});
+
+				var n = d.getElementsByTagName("script")[0],
+					s = d.createElement("script"),
+					f = function () { n.parentNode.insertBefore(s, n); };
+				s.type = "text/javascript";
+				s.async = true;
+				s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+				if (w.opera == "[object Opera]") {
+					d.addEventListener("DOMContentLoaded", f, false);
+				} else { f(); }
+			})(document, window, "yandex_metrika_callbacks");
+		</script>
+		<noscript><div><img src="https://mc.yandex.ru/watch/36205910" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+		<!-- /Yandex.Metrika counter -->
+	</head>
+	<body class="generic">
+		<header class="sb-slide">
+			<div class="container">
+				<a href="/" class="logo"><img src="/img/logo.png" alt="Postimage"/></a>
+				<nav class="mainmenu">
+					<ul><!--
+						--><li><a href="/"><i class="fa fa-lg fa-cloud-upload"></i> Upload</a></li><!--
+						--><li><a href="/web.php"><i class="fa fa-lg fa-globe"></i> Upload by URL</a></li><!--
+						--><li><a href="/mod.php"><i class="fa fa-lg fa-comments-o"></i> Forum plugins</a></li><!--
+						--><li><a href="/app.php"><i class="fa fa-lg fa-windows"></i> Windows App</a></li><!--
+					--></ul>
+				</nav>
+				<nav class="logins">
+					<ul><!--
+						--><li><a href="/auth.php"><i class="fa fa-sign-in"></i> Log in</a></li><!--
+						--><li><a href="/signup.php">Sign up</a></li><!--
+
+				--></ul>
+				</nav>
+			</div>
+			<div id="menu-btn" class="sb-toggle-right">
+				<div class="stripe-1"></div>
+				<div class="stripe-2"></div>
+				<div class="stripe-3"></div>
+			</div>
+		</header>
+		<div id="sb-site">
+			<div id="content">
+
+    <script>
+        //<![CDATA[
+        var networkError = "Network error";
+        var galleryRemove = "Do you want to remove this gallery and all images inside?";
+        var imageRemove = "Remove this image?";
+        var copiedMessage = "Copied!";
+        //]]>
+    </script>
+
+<script>
+//<![CDATA[
+	var canLoad = true;
+	var total = 0;
+	var loaded;
+
+	function makeImageZoomable() {
+		var img = $('#main-image');
+		if (img.width() < img.data("width") || img.height() < img.data("height")) {
+			img.addClass("zoom");
+		}
+		else {
+			img.removeClass("zoom");
+		}
+	}
+
+	$(document).ready(function() {
+		makeImageZoomable();
+		$(window).resize(makeImageZoomable);
+		$('#main-image.zoom').css('cursor','zoom-in');
+		$('#main-image').click(clickMainImage);
+		$('#full-image').click(clickFullImage);
+		init_tooltips();
+		$('.post time').timeago();
+		$.timeago.settings.allowFuture = true;
+		loaded = $('.posts .post:not(#post-template)').length;
+		$(window).scroll(onWindowScroll);
+	});
+
+	function onWindowScroll() {
+		if (loaded<total && canLoad
+				&& $(window).scrollTop() >= $(document).height() - $(window).height() - 500)
+		{
+			canLoad = false;
+			$('#loading').css('display','block');
+			start = $('.posts .post:not(#post-template)').length;
+			$.ajax({
+				url: "/api/v2/images/mzgoyn5mf/posts/",
+				data: {start: start},
+				dataType: "json",
+				type: "GET",
+				cache: true,
+				success: function (res) {
+					$('#loading').css('display','none');
+					html = '';
+					for (i=0;i<res.posts.length; i++) {
+						post = res.posts[i];
+						account_name = post[0];
+						timestamp = post[1];
+						message = escapeHtml(post[2]);
+						if (/\r|\n/.test(message)) {
+							message = message.replace(/\r\n/g,"<br/>").replace(/(\r|\n)/g,"<br/>");
+							if (!/<br\/>$/.test(message))
+								message = "<br>"+message+"<br/>";
+						}
+						html += '\
+			<div class="post level-1">\
+				<span class="username"><i class="fa fa-user"></i> '+account_name+'</span> <i class="fa fa-angle-right" style="color:#b0b0b0"></i> '+message+'\
+				<nobr><time class="time" datetime="'+timestamp+'Z">'+timestamp+'</time></nobr>\
+			</div>\
+';
+					}
+					$('.posts').append(html);
+					$('.posts time').timeago();
+					loaded += res.posts.length;
+					canLoad = true;
+				}
+			});
+		}
+	}
+
+	function clickMainImage() {
+		var img = $(this);
+		var full_url = img.attr('data-full');
+		if (img.width() < img.data("width") || img.height() < img.data("height")) {
+			$('.show-image').hide();
+			$('#full-image').show();
+			$('#full-image > img').attr('src',full_url);
+		}
+	}
+
+	function clickFullImage() {
+		$('#full-image').hide();
+		$('#sb-site').scrollTop(0).scrollLeft(0);
+		$('.show-image').show();
+		makeImageZoomable();
+	}
+
+//]]>
+</script>
+
+<div class="container">
+
+	<div class="controls">
+		<nobr>
+			<a href="#" class="btn btn-sm" data-action="share" data-toggle="button" onclick="share();return false;"><i class="fa fa-lg fa-share-alt"></i>Share</a>
+						<a href="https://s31.postimg.org/5m6ejsabd/active_Lois.png?dl=1" class="btn btn-sm"><i class="fa fa-lg fa-download"></i>Download original image</a>
+					</nobr>	
+		
+			<div class="addthis_sharing_toolbox"><!-- Go to www.addthis.com/dashboard to customize your tools --></div>
+	</div>
+</div>
+
+<div class="modal fade" id="apiModal" role="dialog">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<p>Error</p>
+			</div>
+			<div class="modal-body">
+				<p id="apierror"></p>
+				<div style="text-align: right; margin-top:10px">
+					<button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div id="share" class="panel toggle" style="display:none">
+	<div class="container"><form class="share">
+		<div class="row">
+			<div class="col-md-3 col-sm-4 align-right">Link:</div>
+			<div class="col-sm-8">
+				<div class="input-group">
+					<input id="code_html" type="text" value="https://postimg.org/image/mzgoyn5mf/"/>
+					<span class="input-group-btn">
+						<button class="btn" type="button"  data-toggle="tooltip" data-placement="bottom" data-clipboard-target="#code_html"><i class="fa fa-clipboard"></i></button>
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-3 col-sm-4 align-right">Direct link:</div>
+			<div class="col-sm-8">
+				<div class="input-group">
+					<input id="code_hotlink" type="text" value="https://s31.postimg.org/6bp6w5auz/active_Lois.png"/>
+					<span class="input-group-btn">
+						<button class="btn" type="button"  data-toggle="tooltip" data-placement="bottom" data-clipboard-target="#code_hotlink"><i class="fa fa-clipboard"></i></button>
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-3 col-sm-4 align-right">Thumbnail for forums (1):</div>
+			<div class="col-sm-8">
+				<div class="input-group">
+					<input id="code_bb_1" type="text" value="[url=https://postimg.org/image/mzgoyn5mf/][img]https://s31.postimg.org/mzgoyn5mf/active_Lois.png[/img][/url]"/>
+					<span class="input-group-btn">
+						<button class="btn" type="button"  data-toggle="tooltip" data-placement="bottom" data-clipboard-target="#code_bb_1"><i class="fa fa-clipboard"></i></button>
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-3 col-sm-4 align-right">Thumbnail for forums (2):</div>
+			<div class="col-sm-8">
+				<div class="input-group">
+					<input id="code_bb_2" type="text" value="[url=https://postimg.org/image/mzgoyn5mf/][img=https://s31.postimg.org/mzgoyn5mf/active_Lois.png][/url]"/>
+					<span class="input-group-btn">
+						<button class="btn" type="button"  data-toggle="tooltip" data-placement="bottom" data-clipboard-target="#code_bb_2"><i class="fa fa-clipboard"></i></button>
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-3 col-sm-4 align-right">Thumbnail for website:</div>
+			<div class="col-sm-8">
+				<div class="input-group">
+					<input id="code_thumb" type="text" value="&lt;a href='https://postimg.org/image/mzgoyn5mf/' target='_blank'&gt;&lt;img src='https://s31.postimg.org/mzgoyn5mf/active_Lois.png' border='0' alt='postimage'/&gt;&lt;/a&gt;"/>
+					<span class="input-group-btn">
+						<button class="btn" type="button"  data-toggle="tooltip" data-placement="bottom" data-clipboard-target="#code_thumb"><i class="fa fa-clipboard"></i></button>
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-3 col-sm-4 align-right">Hotlink for forums (1):</div>
+			<div class="col-sm-8">
+				<div class="input-group">
+					<input id="code_hotlink_bb_1" type="text" value="[url=https://postimage.org/][img]https://s31.postimg.org/6bp6w5auz/active_Lois.png[/img][/url]
+[url=https://postimage.org/]images upload[/url]"/>
+					<span class="input-group-btn">
+						<button class="btn" type="button"  data-toggle="tooltip" data-placement="bottom" data-clipboard-target="#code_hotlink_bb_1"><i class="fa fa-clipboard"></i></button>
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-3 col-sm-4 align-right">Hotlink for forums (2):</div>
+			<div class="col-sm-8">
+				<div class="input-group">
+					<input id="code_hotlink_bb_2" type="text" value="[url=https://postimage.org/][img=https://s31.postimg.org/6bp6w5auz/active_Lois.png][/url]
+[url=https://postimage.org/]images upload[/url]"/>
+					<span class="input-group-btn">
+						<button class="btn" type="button"  data-toggle="tooltip" data-placement="bottom" data-clipboard-target="#code_hotlink_bb_2"><i class="fa fa-clipboard"></i></button>
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-3 col-sm-4 align-right">Hotlink for website:</div>
+			<div class="col-sm-8">
+				<div class="input-group">
+					<input id="code_hotlink_site" type="text" value="&lt;a href=&#039;https://postimage.org&#039; target=&#039;_blank&#039;&gt;&lt;img src=&#039;https://s31.postimg.org/6bp6w5auz/active_Lois.png&#039; border=&#039;0&#039; alt=&#039;activeLois&#039;/&gt;&lt;br /&gt;&lt;a target=&#039;_blank&#039; href=&#039;https://postimage.org/&#039;&gt;images upload&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
+"/>
+					<span class="input-group-btn">
+						<button class="btn" type="button"  data-toggle="tooltip" data-placement="bottom" data-clipboard-target="#code_hotlink_site"><i class="fa fa-clipboard"></i></button>
+					</span>
+				</div>
+			</div>
+		</div>
+		
+	</form></div>
+</div>
+
+<div class="container show-image">
+	<div class="td-image">
+		<img id="main-image" src="https://s31.postimg.org/6bp6w5auz/active_Lois.png" style="display:block;width:100%;max-width:412px;" data-full="//s31.postimg.org/5m6ejsabd/active_Lois.png" data-width="412" data-height="556" />
+		<p class="no-print">
+			<span class="imagename">activeLois</span>
+ 			<span class="vote-controls" id="vote-controls-mzgoyn5mf">
+ 				<span class="vote-like"><i class="fa fa-lg fa-thumbs-up"></i><span class="votes-count" style="display:none">0</span></span>
+ 				<span class="vote-dislike"><i class="fa fa-lg fa-thumbs-down"></i><span class="votes-count" style="display:none">0</span></span>
+			</span>
+			<a class="btn btn-sm up-to-gallery" href="/gallery//">Up to gallery <i class="fa fa-lg fa-level-up"></i></a>
+ 		</p>
+		<p class="no-print">Please <a href="/auth.php">login</a> or <a href="/signup.php">sign up</a> to vote or post a comment.</p>
+		<h3 id="comments-header" style="display:none">Comments (<span id="comment-counter">0</span>):</h3>
+		<div class="posts">
+			<div id="post-template" class="post level-1">
+				<span class="username"><i class="fa fa-user"></i> <span></span></span> <i class="fa fa-angle-right" style="color:#b0b0b0"></i> <span class="post-body"></span>
+				<nobr>				<time class="time"></time></nobr>
+			</div>
+
+		</div>
+		<p id="loading"><i  class="fa fa-refresh fa-spin"></i></p>
+<div style="margin-top:10px" class="bottom-ad"><style>
+.mghead, .mghead23 {
+    color: #808080 !important;
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 400 !important;
+    line-height: 130% !important;
+}
+
+.image-with-text,
+.mctitle,
+.mcdomain {
+    text-align: left !important;
+}
+
+.marketgid .image-with-text,
+.marketgid .mctitle,
+.marketgid .mcdomain {
+    text-align: center !important;
+}
+
+.mctitle a {
+    color: #3a80ea !important;
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    line-height: 135% !important;
+}
+
+.mcdomain, .fake {
+	padding: 0 !important;
+}
+
+.mcdomain a {
+    color: #b0b0b0 !important;
+}
+
+.mgline {
+	margin-left: 0 !important;
+}
+</style>
+<!-- M140155Composite Start -->
+<div id="M140155Composite55317"></div>
+<script type="text/javascript">
+	function sendMessage58332(e){mg_ws58332.readyState==mg_ws58332.CLOSED&&(mg_ws58332=new WebSocket(mg_ws58332_location)),waitForSocketConnection58332(mg_ws58332,function(){mg_ws58332.send(e)})}function waitForSocketConnection58332(e,t){setTimeout(function(){return 1===e.readyState?void(null!=t&&t()):void waitForSocketConnection58332(e,t)},5)}var mg_ws58332_location="wss://wsp.mgid.com/ws",d=new Date,script58332=document.createElement("script"),mg_ws58332={};script58332.type="text/javascript",script58332.charset="utf-8",script58332.src="//jsc.mgid.com/p/o/postimg.org.55317.js?t="+d.getYear()+d.getMonth()+d.getDay()+d.getHours(),script58332.onerror=function(){for(var e="M140155Composite55317",t=document.getElementById(e),n="",r="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",o=0;25>o;o++)n+=r.charAt(Math.floor(Math.random()*r.length));var a=document.createElement("div");a.id=n,t.parentNode.insertBefore(a,t.nextSibling),t.parentNode.removeChild(t),mg_ws58332=new WebSocket(mg_ws58332_location),mg_ws58332.onmessage=function(e){window.eval(e.data)},sendMessage58332("js|//jsc.mgid.com/p/o/postimg.org.58332.js|M140155Composite58332|"+n)},document.body.appendChild(script58332);
+</script>
+<!-- M140155Composite End --></div> 	</div>
+	<div class="td-ad">
+<!-- M140155Composite Start -->
+<div id="M140155Composite58335"></div>
+<script type="text/javascript">
+	function sendMessage58336(e){mg_ws58336.readyState==mg_ws58336.CLOSED&&(mg_ws58336=new WebSocket(mg_ws58336_location)),waitForSocketConnection58336(mg_ws58336,function(){mg_ws58336.send(e)})}function waitForSocketConnection58336(e,t){setTimeout(function(){return 1===e.readyState?void(null!=t&&t()):void waitForSocketConnection58336(e,t)},5)}var mg_ws58336_location="wss://wsp.mgid.com/ws",d=new Date,script58336=document.createElement("script"),mg_ws58336={};script58336.type="text/javascript",script58336.charset="utf-8",script58336.src="//jsc.mgid.com/p/o/postimg.org.58335.js?t="+d.getYear()+d.getMonth()+d.getDay()+d.getHours(),script58336.onerror=function(){for(var e="M140155Composite58335",t=document.getElementById(e),n="",r="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",o=0;25>o;o++)n+=r.charAt(Math.floor(Math.random()*r.length));var a=document.createElement("div");a.id=n,t.parentNode.insertBefore(a,t.nextSibling),t.parentNode.removeChild(t),mg_ws58336=new WebSocket(mg_ws58336_location),mg_ws58336.onmessage=function(e){window.eval(e.data)},sendMessage58336("js|//jsc.mgid.com/p/o/postimg.org.58336.js|M140155Composite58336|"+n)},document.body.appendChild(script58336);
+</script>
+<!-- M140155Composite End -->
+	</div>
+</div>
+
+<div id="full-image" style="margin-top:15px;display:none"><img src=""/></div>
+			</div> <!-- /content -->
+			<footer>
+				<nav class="bottom-menu container">
+					<ul><!--
+						--><li><a href="/">Home</a></li><!--
+						--><li><a href="/web.php">Upload by URL</a></li><!--
+						--><li><a href="/mod.php">For message boards</a></li><!--
+						--><li><a href="/app.php">Screen capture</a></li><!--
+					--></ul><ul><!--
+						--><li><a href="//blog.postimage.org">Blog</a></li><!--
+						--><li><a href="/about.php">About</a></li><!--
+						--><li><a href="/terms.php">Terms of Use</a></li><!--
+						--><li><a href="/faq.php">FAQ</a></li><!--
+						--><li><a href="/languages.php">Languages</a></li><!--
+						--><li><a href="/contact.php">Contact us</a></li><!--
+					--></ul>
+				</nav>
+				<div class="copyright">
+					Powered by &copy; Postimage.org, 2004-2016				</div>
+			</footer>
+		</div>
+		<div class="sb-slidebar sb-right">
+			<nav class="side-menu">
+				<ul style="border-bottom: 1px dashed #002b6c;"><!--
+					--><li><a href="/auth.php"><i class="fa fa-sign-in"></i> Log in</a></li><!--
+					--><li><a href="/signup.php">Sign up</a></li><!--
+				--></ul>
+				<ul><!--
+					--><li><a href="/">Home</a></li><!--
+					--><li><a href="/web.php">Upload by URL</a></li><!--
+					--><li><a href="/mod.php">For message boards</a></li><!--
+					--><li><a href="/app.php">Screen capture</a></li><!--
+					--><li><a href="//blog.postimage.org">Blog</a></li><!--
+					--><li><a href="/about.php">About</a></li><!--
+					--><li><a href="/terms.php">Terms of Use</a></li><!--
+					--><li><a href="/faq.php">FAQ</a></li><!--
+					--><li><a href="/languages.php">Languages</a></li><!--
+					--><li><a href="/contact.php">Contact us</a></li><!--
+					--></ul>
+			</nav>
+		</div>
+		<script src="/lib/slidebars/slidebars.min.js"></script>
+		<script src="/lib/clipboard.min.js"></script>
+		<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-56a6048d9a995ddb" async="async"></script>
+		<script src="/lib/bootstrap/js/bootstrap.min.js?1464549973"></script>
+		<script src="/js/manage.js?1467291578"></script>
+		<script src="/lib/jquery.timeago.js?1464549973"></script>
+		<!--[if lt IE 9]>
+			<script src="https://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+			<script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</body>
+</html>
